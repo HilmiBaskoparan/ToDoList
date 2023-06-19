@@ -12,13 +12,13 @@ public interface ITodoService {
     public void addTodo(String userName, String description);
 
     // DELETE BY ID
-    public void deleteTodo(Long id);
+    public void deleteById(Long id);
 
     // UPDATE BY ID
-    public void updateTodo(TodoEntity todo);
+    public void updateById(TodoEntity todo);
 
     // LIST
-    public List<TodoEntity> listTodos();
+    public List<TodoEntity> list();
 
     // LIST BY USERNAME
     public List<TodoEntity> listByUserName(String userName);
