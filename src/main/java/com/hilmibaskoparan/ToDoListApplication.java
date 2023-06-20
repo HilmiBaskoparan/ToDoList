@@ -5,6 +5,8 @@ import org.springframework.boot.actuate.autoconfigure.security.servlet.Managemen
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
+// Disabling the Auto-Configuration
+// To discard the security auto-configuration and add our own configuration, we need to exclude the SecurityAutoConfiguration class.
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class})
 public class ToDoListApplication {
 
