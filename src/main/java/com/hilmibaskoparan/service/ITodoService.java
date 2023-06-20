@@ -3,19 +3,18 @@ package com.hilmibaskoparan.service;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ITodoService {
 
     // CRUD OPERATIONS
     // CREATE - ADD
-    public void addTodo(String userName, String description);
+    public TodoEntity addTodo(TodoEntity todo);
 
     // DELETE BY ID
-    public void deleteById(Long id);
+    public TodoEntity deleteById(Long id);
 
     // UPDATE BY ID
-    public void updateById(TodoEntity todo);
+    public TodoEntity updateById(Long id, TodoEntity todo);
 
     // LIST
     public List<TodoEntity> list();
@@ -23,6 +22,9 @@ public interface ITodoService {
     // LIST BY USERNAME
     public List<TodoEntity> listByUserName(String userName);
 
-    // GET BY ID
-    public Optional<TodoEntity> getById(Long id);
+    // FIND BY ID
+    public TodoEntity finById(Long id);
+
+    // DELETE ALL
+    public String allDeleteService();
 }
