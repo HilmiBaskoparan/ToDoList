@@ -112,7 +112,7 @@ public class TodoServiceImpl implements ITodoService {
 
     // DELETE ALL
     @Override
-    public String allDeleteService() {
+    public String deleteAll() {
         todoRepository.deleteAll();
         log.info("All Todo Tasks are deleted.");
         return "All Todo Tasks are deleted.";

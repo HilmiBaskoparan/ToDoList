@@ -2,7 +2,6 @@ package com.hilmibaskoparan.controller;
 
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -28,4 +27,5 @@ public interface ITodoApi {
     public ResponseEntity<TodoEntity> findById(Long id);
 
     // DELETE ALL
+    public ResponseEntity<String>  deleteAll();
 }

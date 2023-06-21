@@ -26,5 +26,5 @@ public interface ITodoService {
     public TodoEntity finById(Long id);
 
     // DELETE ALL
-    public String allDeleteService();
+    public String deleteAll();
 }
