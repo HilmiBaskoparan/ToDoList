@@ -66,7 +66,8 @@ public class TodoServiceImpl implements ITodoService {
             todoFromDb.setId(id);
             todoFromDb.setUserName(todo.getUserName());
             todoFromDb.setDescription(todo.getDescription());
-            todoFromDb.setCreatedDate(todo.getCreatedDate());
+            //todoFromDb.setCreatedDate(todo.getCreatedDate());
+            todoFromDb.setCreatedDate(new Date(System.currentTimeMillis()));
             todoRepository.save(todoFromDb);
         }
         return todoFromDb;
