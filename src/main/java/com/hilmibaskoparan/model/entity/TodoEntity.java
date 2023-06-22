@@ -1,9 +1,6 @@
 package com.hilmibaskoparan.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +18,6 @@ public class TodoEntity extends BaseEntity {
     @Column(name = "username")
     private String userName;
 
-    @Size(min = 5, message = "Enter at least 5 Characters...")
-    @Column(name = "description", columnDefinition = "varchar(255) default 'You didn't enter a description'")
+    @Column(name = "description", columnDefinition = "varchar(255) default 'content girmediniz'")
     private String description;
 }
