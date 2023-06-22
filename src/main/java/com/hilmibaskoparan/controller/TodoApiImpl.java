@@ -80,9 +80,17 @@ public class TodoApiImpl implements ITodoApi {
         return new ResponseEntity<>(todoService.finById(id), HttpStatus.OK);
     }
 
+    // DELETE ALL
     @GetMapping("/delete/all")
     @Override
     public ResponseEntity<String> deleteAll() {
         return ResponseEntity.ok(todoService.deleteAll());
+    }
+
+    // ADD SPEED DATA
+    @GetMapping("/speed/data")
+    @Override
+    public ResponseEntity<List<TodoEntity>> addSpeedData() {
+        return ResponseEntity.ok(todoService.addSpeedData());
     }
 }

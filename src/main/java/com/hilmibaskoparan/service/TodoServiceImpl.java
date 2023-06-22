@@ -8,8 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Log4j2
@@ -116,5 +115,20 @@ public class TodoServiceImpl implements ITodoService {
         todoRepository.deleteAll();
         log.info("All Todo Tasks are deleted.");
         return "All Todo Tasks are deleted.";
+    }
+
+    // ADD 10 RANDOM DATA
+    @Override
+    public List<TodoEntity> addSpeedData() {
+        List<TodoEntity> list = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            TodoEntity todo = TodoEntity.builder()
+                    .userName("username_" + (int) Math.floor(Math.random() * 10))
+                    .description("That is description " + (int) Math.floor(Math.random() * 100))
+                    .build();
+            addTodo(todo);
+            list.add(todo);
+        }
+        return list;
     }
 }

@@ -27,4 +27,7 @@ public interface ITodoService {
 
     // DELETE ALL
     public String deleteAll();
+
+    // ADD SPEED DATA
+    public List<TodoEntity> addSpeedData();
 }

@@ -27,5 +27,8 @@ public interface ITodoApi {
     public ResponseEntity<TodoEntity> findById(Long id);
 
     // DELETE ALL
-    public ResponseEntity<String>  deleteAll();
+    public ResponseEntity<String> deleteAll();
+
+    // ADD 10 DATA
+    public ResponseEntity<List<TodoEntity>> addSpeedData();
 }
