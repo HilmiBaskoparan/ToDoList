@@ -14,14 +14,11 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Log4j2
-
 @Service
 public class TodoServiceImpl implements ITodoService {
 
     private final ITodoRepository todoRepository;
 
-    // CRUD OPERATIONS
-    // CREATE - ADD
     @Transactional
     @Override
     public TodoEntity addTodo(TodoAddRequest todoRequest) {
@@ -35,83 +32,70 @@ public class TodoServiceImpl implements ITodoService {
         }
     }
 
-    // DELETE
     @Transactional
     @Override
     public TodoEntity deleteById(Long id) {
 
+        TodoEntity existTodo = finById(id);
+        if (Objects.nonNull(existTodo)) {
+            todoRepository.deleteById(id);
+            return existTodo;
+        } else {
+            log.error("Todo is not found");
+            throw new BadRequestException("Todo is not found");
+        }
+
         /*Optional<TodoEntity> todoEntity = todoRepository.findById(id);
         if (todoEntity.isPresent()) {
             todoRepository.delete(todoEntity.get());
+            return todoEntity.get();
         } else {
             throw new ResourceNotFoundException("There is no Todo");
         }*/
-
-        TodoEntity findTodo = null;
-        if (id != null) {
-            findTodo = finById(id);
-            todoRepository.deleteById(id);
-        } else if (id == null) {
-            log.error("Null Todo ID");
-            throw new BadRequestException("There is no Todo ID");
-        }
-        //return todoEntity.get();
-        return findTodo;
     }
 
-    // UPDATE
     @Transactional
     @Override
     public TodoEntity updateById(Long id, TodoUpdateRequest request) {
         TodoEntity todoFromDb = todoRepository.findById(id).get();
-        //System.out.println(todoFromDb.toString());
-        if (todoFromDb != null) {
-            todoFromDb.setDescription(request.getDescription());
-            todoFromDb.setIsDone(request.getIsDone());
-            todoFromDb.setCreatedDate(new Date(System.currentTimeMillis()));
-            todoRepository.save(todoFromDb);
+        if (Objects.isNull(todoFromDb)) {
+            log.error("Todo not found.");
+            throw new BadRequestException("Todo is not found.");
         }
-        return todoFromDb;
+
+        if (Objects.nonNull(request.getDescription())) {
+            todoFromDb.setDescription(request.getDescription());
+        }
+
+        if (Objects.nonNull(request.getIsDone())) {
+            todoFromDb.setIsDone(request.getIsDone());
+        }
+        return todoRepository.save(todoFromDb);
     }
 
-    // LIST
     @Override
     public List<TodoEntity> list() {
-        Iterable<TodoEntity> todoEntities = todoRepository.findAll();
+        // First Way
+        /*Iterable<TodoEntity> todoEntities = todoRepository.findAll();
         List<TodoEntity> todoList = new ArrayList<>();
         for (TodoEntity todo : todoEntities) {
             todoList.add(todo);
-        }
-        //todoRepository.findAll().forEach(todoList::add);
+        }*/
+
+        // Second Way
+        List<TodoEntity> todoList = new ArrayList<>();
+        todoRepository.findAll().forEach(todoList::add);
         return todoList;
     }
 
-    /* LIST BY USERNAME
-    @Override
-    public List<TodoEntity> listByUserName(String userName) {
-        if (userName == null || userName == "") {
-            log.error("No USERNAME");
-            throw new BadRequestException("No USERNAME");
-        }
-        return todoRepository.findByUserName(userName);
-    }*/
-
-    // FIND BY ID
     @Override
     public TodoEntity finById(Long id) {
-        TodoEntity todo = null;
-        if (id != null) {
-            todo = todoRepository.findById(id)
-                    .orElseThrow(() -> new BadRequestException("There is no ID Number " + id));
-        } else if (id == null) {
-            log.error(id + " Task is NULL");
-            throw new BadRequestException(id + " Task is NULL");
-        }
-        //return todoRepository.findById(id).get();
-        return todo;
+        /*TodoEntity todoTask = null;
+            todoTask = todoRepository.findById(id)
+                    .orElseThrow(() -> new BadRequestException("There is no ID Number " + id));*/
+        return todoRepository.findById(id).orElse(null);
     }
 
-    // DELETE ALL
     @Override
     public String deleteAll() {
         todoRepository.deleteAll();
