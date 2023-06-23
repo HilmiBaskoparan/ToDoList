@@ -10,14 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 @Entity
 @Table(name = "todo_list")
 public class TodoEntity extends BaseEntity {
 
-    @Column(name = "username")
-    private String userName;
+    /*@Column(name = "username")
+    private String userName;*/
 
     @Column(name = "description", columnDefinition = "varchar(255) default 'content girmediniz'")
     private String description;
+
+    @Column(name = "status")
+    private Boolean isDone;
 }
