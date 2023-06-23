@@ -20,7 +20,7 @@ public interface ITodoService {
     public List<TodoEntity> list();
 
     // LIST BY USERNAME
-    public List<TodoEntity> listByUserName(String userName);
+    // public List<TodoEntity> listByUserName(String userName);
 
     // FIND BY ID
     public TodoEntity finById(Long id);

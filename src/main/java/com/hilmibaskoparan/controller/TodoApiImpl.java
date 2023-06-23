@@ -63,14 +63,14 @@ public class TodoApiImpl implements ITodoApi {
         return new ResponseEntity<>(todoList, HttpStatus.OK);
     }
 
-    // LIST BY USERNAME
-    // The function receives a GET request, processes it and gives back a list of todoTask with the specified username
+    /* LIST BY USERNAME
+       The function receives a GET request, processes it and gives back a list of todoTask with the specified username
     @Override
     @GetMapping("list/{username}")
     public ResponseEntity<List<TodoEntity>> listByUserName(@PathVariable("username") String username) {
         List<TodoEntity> todoList = todoService.listByUserName(username);
         return new ResponseEntity<>(todoList, HttpStatus.OK);
-    }
+    }*/
 
     // FIND BY ID
     // The function receives a GET request, processes it, and gives back a todoTask as a response.

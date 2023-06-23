@@ -63,10 +63,8 @@ public class TodoServiceImpl implements ITodoService {
         TodoEntity todoFromDb = todoRepository.findById(id).get();
         //System.out.println(todoFromDb.toString());
         if (todoFromDb != null) {
-            todoFromDb.setId(id);
-            todoFromDb.setUserName(todo.getUserName());
             todoFromDb.setDescription(todo.getDescription());
-            //todoFromDb.setCreatedDate(todo.getCreatedDate());
+            todoFromDb.setIsDone(todo.getIsDone());
             todoFromDb.setCreatedDate(new Date(System.currentTimeMillis()));
             todoRepository.save(todoFromDb);
         }
@@ -85,7 +83,7 @@ public class TodoServiceImpl implements ITodoService {
         return todoList;
     }
 
-    // LIST BY USERNAME
+    /* LIST BY USERNAME
     @Override
     public List<TodoEntity> listByUserName(String userName) {
         if (userName == null || userName == "") {
@@ -93,7 +91,7 @@ public class TodoServiceImpl implements ITodoService {
             throw new BadRequestException("No USERNAME");
         }
         return todoRepository.findByUserName(userName);
-    }
+    }*/
 
     // FIND BY ID
     @Override
@@ -124,7 +122,6 @@ public class TodoServiceImpl implements ITodoService {
         List<TodoEntity> list = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             TodoEntity todo = TodoEntity.builder()
-                    .userName("username_" + (int) Math.floor(Math.random() * 10))
                     .description("That is description " + (int) Math.floor(Math.random() * 100))
                     .build();
             addTodo(todo);

@@ -21,7 +21,7 @@ public interface ITodoApi {
     public ResponseEntity<List<TodoEntity>> listTodos();
 
     // LIST BY USERNAME
-    public ResponseEntity<List<TodoEntity>> listByUserName(String userName);
+    // public ResponseEntity<List<TodoEntity>> listByUserName(String userName);
 
     // FIND BY ID
     public ResponseEntity<TodoEntity> findById(Long id);
