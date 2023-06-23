@@ -75,17 +75,21 @@ public class TodoServiceImpl implements ITodoService {
 
     @Override
     public List<TodoEntity> list() {
-        // First Way
-        /*Iterable<TodoEntity> todoEntities = todoRepository.findAll();
+        /*
+        // ########## FIRST WAY ##########
+        Iterable<TodoEntity> todoEntities = todoRepository.findAll();
         List<TodoEntity> todoList = new ArrayList<>();
         for (TodoEntity todo : todoEntities) {
             todoList.add(todo);
-        }*/
+        }
+        return todoList;
 
-        // Second Way
+        // ########## SECOND WAY ##########
         List<TodoEntity> todoList = new ArrayList<>();
         todoRepository.findAll().forEach(todoList::add);
-        return todoList;
+        return todoList;*/
+
+        return todoRepository.findAllTodos();
     }
 
     @Override
