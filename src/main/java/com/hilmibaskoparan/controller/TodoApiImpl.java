@@ -25,7 +25,6 @@ public class TodoApiImpl implements ITodoApi {
 
     // localhost:4040/api/v1/todo/
 
-    // CREATE - ADD
     /* The function receives a POST request, processes it, creates a new todoTask and
        saves it to the database, and returns a resource link to the created todoTask. */
     @Override
@@ -37,17 +36,13 @@ public class TodoApiImpl implements ITodoApi {
         return new ResponseEntity<>(todoEntity, httpHeaders, HttpStatus.CREATED);
     }
 
-    // DELETE BY ID
     // The function receives a DELETE request, deletes the todoTask with the specified ID.
     @Override
     @DeleteMapping({"/delete/{id}"})
     public ResponseEntity<TodoEntity> deleteTodo(@PathVariable("id") Long id) {
-        todoService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(todoService.deleteById(id),HttpStatus.OK);
     }
 
-
-    // UPDATE BY ID
     // The function receives a PUT request, updates the todoTask with the specified Id and returns the updated todoTask
     @Override
     @PutMapping({"/update/{id}"})
@@ -56,13 +51,25 @@ public class TodoApiImpl implements ITodoApi {
         return new ResponseEntity<>(todoEntity, HttpStatus.OK);
     }
 
-    // LIST
     // The function receives a GET request, processes it and gives back a list of todoTask as a response.
     @Override
     @GetMapping("/list")
     public ResponseEntity<List<TodoEntity>> listTodos() {
         List<TodoEntity> todoList = todoService.list();
         return new ResponseEntity<>(todoList, HttpStatus.OK);
+    }
+
+    // The function receives a GET request, processes it, and gives back a todoTask as a response.
+    @Override
+    @GetMapping("/find/{id}")
+    public ResponseEntity<TodoEntity> findById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(todoService.finById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/delete/all")
+    @Override
+    public ResponseEntity<String> deleteAll() {
+        return ResponseEntity.ok(todoService.deleteAll());
     }
 
     /* LIST BY USERNAME
@@ -73,21 +80,6 @@ public class TodoApiImpl implements ITodoApi {
         List<TodoEntity> todoList = todoService.listByUserName(username);
         return new ResponseEntity<>(todoList, HttpStatus.OK);
     }*/
-
-    // FIND BY ID
-    // The function receives a GET request, processes it, and gives back a todoTask as a response.
-    @Override
-    @GetMapping("/find/{id}")
-    public ResponseEntity<TodoEntity> findById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(todoService.finById(id), HttpStatus.OK);
-    }
-
-    // DELETE ALL
-    @GetMapping("/delete/all")
-    @Override
-    public ResponseEntity<String> deleteAll() {
-        return ResponseEntity.ok(todoService.deleteAll());
-    }
 
     /*// ADDING 10 RANDOM DATA FOR TEST
     @GetMapping("/speed/data")
