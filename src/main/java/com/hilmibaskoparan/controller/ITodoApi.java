@@ -9,27 +9,20 @@ import java.util.List;
 
 public interface ITodoApi {
 
-    // CRUD OPERATIONS
-    // CREATE - ADD
-    public ResponseEntity<TodoEntity> addTodo(TodoAddRequest request);
+    ResponseEntity<TodoEntity> addTodo(TodoAddRequest request);
 
-    // DELETE BY ID
-    public ResponseEntity<TodoEntity> deleteTodo(Long id);
+    ResponseEntity<TodoEntity> deleteTodo(Long id);
 
-    // UPDATE BY ID
-    public ResponseEntity<TodoEntity> updateTodo(Long id, TodoUpdateRequest request);
+    ResponseEntity<TodoEntity> updateTodo(Long id, TodoUpdateRequest request);
 
-    // LIST
-    public ResponseEntity<List<TodoEntity>> listTodos();
+    ResponseEntity<List<TodoEntity>> listTodos();
+
+    ResponseEntity<TodoEntity> findById(Long id);
+
+    ResponseEntity<String> deleteAll();
 
     // LIST BY USERNAME
     // public ResponseEntity<List<TodoEntity>> listByUserName(String userName);
-
-    // FIND BY ID
-    public ResponseEntity<TodoEntity> findById(Long id);
-
-    // DELETE ALL
-    public ResponseEntity<String> deleteAll();
 
     // ADDING 10 RANDOM DATA FOR TEST
     // public ResponseEntity<List<TodoEntity>> addSpeedData();

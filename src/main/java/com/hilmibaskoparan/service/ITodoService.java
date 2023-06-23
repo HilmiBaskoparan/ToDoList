@@ -8,27 +8,20 @@ import java.util.List;
 
 public interface ITodoService {
 
-    // CRUD OPERATIONS
-    // CREATE - ADD
-    public TodoEntity addTodo(TodoAddRequest request);
+    TodoEntity addTodo(TodoAddRequest addRequest);
 
-    // DELETE BY ID
-    public TodoEntity deleteById(Long id);
+    TodoEntity deleteById(Long id);
 
-    // UPDATE BY ID
-    public TodoEntity updateById(Long id, TodoUpdateRequest request);
+    TodoEntity updateById(Long id, TodoUpdateRequest updateRequest);
 
-    // LIST
-    public List<TodoEntity> list();
+    List<TodoEntity> list();
+
+    TodoEntity finById(Long id);
+
+    String deleteAll();
 
     // LIST BY USERNAME
     // public List<TodoEntity> listByUserName(String userName);
-
-    // FIND BY ID
-    public TodoEntity finById(Long id);
-
-    // DELETE ALL
-    public String deleteAll();
 
     // ADD SPEED DATA
     // public List<TodoEntity> addSpeedData();
