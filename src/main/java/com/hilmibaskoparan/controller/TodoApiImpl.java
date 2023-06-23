@@ -1,6 +1,7 @@
 package com.hilmibaskoparan.controller;
 
 import com.hilmibaskoparan.model.Request.TodoAddRequest;
+import com.hilmibaskoparan.model.Request.TodoUpdateRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import com.hilmibaskoparan.service.ITodoService;
 import lombok.RequiredArgsConstructor;
@@ -50,9 +51,9 @@ public class TodoApiImpl implements ITodoApi {
     // The function receives a PUT request, updates the todoTask with the specified Id and returns the updated todoTask
     @Override
     @PutMapping({"/update/{id}"})
-    public ResponseEntity<TodoEntity> updateTodo(@PathVariable("id") Long id, @RequestBody TodoEntity todo) {
-        todoService.updateById(id, todo);
-        return new ResponseEntity<>(todoService.finById(id), HttpStatus.OK);
+    public ResponseEntity<TodoEntity> updateTodo(@PathVariable("id") Long id, @RequestBody TodoUpdateRequest request) {
+        TodoEntity todoEntity = todoService.updateById(id, request);
+        return new ResponseEntity<>(todoEntity, HttpStatus.OK);
     }
 
     // LIST

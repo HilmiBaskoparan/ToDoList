@@ -1,6 +1,7 @@
 package com.hilmibaskoparan.controller;
 
 import com.hilmibaskoparan.model.Request.TodoAddRequest;
+import com.hilmibaskoparan.model.Request.TodoUpdateRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -16,7 +17,7 @@ public interface ITodoApi {
     public ResponseEntity<TodoEntity> deleteTodo(Long id);
 
     // UPDATE BY ID
-    public ResponseEntity<TodoEntity> updateTodo(Long id, TodoEntity todo);
+    public ResponseEntity<TodoEntity> updateTodo(Long id, TodoUpdateRequest request);
 
     // LIST
     public ResponseEntity<List<TodoEntity>> listTodos();

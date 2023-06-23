@@ -2,6 +2,7 @@ package com.hilmibaskoparan.service;
 
 import com.hilmibaskoparan.exception.BadRequestException;
 import com.hilmibaskoparan.model.Request.TodoAddRequest;
+import com.hilmibaskoparan.model.Request.TodoUpdateRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import com.hilmibaskoparan.model.repository.ITodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,12 +62,12 @@ public class TodoServiceImpl implements ITodoService {
     // UPDATE
     @Transactional
     @Override
-    public TodoEntity updateById(Long id, TodoEntity todo) {
+    public TodoEntity updateById(Long id, TodoUpdateRequest request) {
         TodoEntity todoFromDb = todoRepository.findById(id).get();
         //System.out.println(todoFromDb.toString());
         if (todoFromDb != null) {
-            todoFromDb.setDescription(todo.getDescription());
-            todoFromDb.setIsDone(todo.getIsDone());
+            todoFromDb.setDescription(request.getDescription());
+            todoFromDb.setIsDone(request.getIsDone());
             todoFromDb.setCreatedDate(new Date(System.currentTimeMillis()));
             todoRepository.save(todoFromDb);
         }

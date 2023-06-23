@@ -1,6 +1,7 @@
 package com.hilmibaskoparan.service;
 
 import com.hilmibaskoparan.model.Request.TodoAddRequest;
+import com.hilmibaskoparan.model.Request.TodoUpdateRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface ITodoService {
     public TodoEntity deleteById(Long id);
 
     // UPDATE BY ID
-    public TodoEntity updateById(Long id, TodoEntity todo);
+    public TodoEntity updateById(Long id, TodoUpdateRequest request);
 
     // LIST
     public List<TodoEntity> list();
