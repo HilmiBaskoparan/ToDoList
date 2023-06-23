@@ -1,5 +1,6 @@
 package com.hilmibaskoparan.service;
 
+import com.hilmibaskoparan.model.Request.TodoAddRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 
 import java.util.List;
@@ -8,7 +9,7 @@ public interface ITodoService {
 
     // CRUD OPERATIONS
     // CREATE - ADD
-    public TodoEntity addTodo(TodoEntity todo);
+    public TodoEntity addTodo(TodoAddRequest request);
 
     // DELETE BY ID
     public TodoEntity deleteById(Long id);
@@ -29,5 +30,5 @@ public interface ITodoService {
     public String deleteAll();
 
     // ADD SPEED DATA
-    public List<TodoEntity> addSpeedData();
+    // public List<TodoEntity> addSpeedData();
 }

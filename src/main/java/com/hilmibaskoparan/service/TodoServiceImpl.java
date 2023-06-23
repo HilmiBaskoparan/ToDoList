@@ -1,6 +1,7 @@
 package com.hilmibaskoparan.service;
 
 import com.hilmibaskoparan.exception.BadRequestException;
+import com.hilmibaskoparan.model.Request.TodoAddRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import com.hilmibaskoparan.model.repository.ITodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +23,15 @@ public class TodoServiceImpl implements ITodoService {
     // CREATE - ADD
     @Transactional
     @Override
-    public TodoEntity addTodo(TodoEntity todo) {
-        if (todo != null) {
-            return todoRepository.save(todo);
-        } else if (todo == null) {
-            log.error("Null Todo");
-            throw new BadRequestException("There is no Todo Task");
+    public TodoEntity addTodo(TodoAddRequest todoRequest) {
+        TodoEntity entityTodo = null;
+        if (Objects.nonNull(todoRequest) && Objects.nonNull(todoRequest.getDescription())) {
+            entityTodo = new TodoEntity(todoRequest.getDescription(), false);
+            return todoRepository.save(entityTodo);
+        } else {
+            log.error("Todo or Description is null.");
+            throw new BadRequestException("The task is not added.");
         }
-        return todo;
     }
 
     // DELETE
@@ -116,7 +118,7 @@ public class TodoServiceImpl implements ITodoService {
         return "All Todo Tasks are deleted.";
     }
 
-    // ADD 10 RANDOM DATA
+    /* ADDING 10 RANDOM DATA FOR TEST
     @Override
     public List<TodoEntity> addSpeedData() {
         List<TodoEntity> list = new ArrayList<>();
@@ -128,5 +130,5 @@ public class TodoServiceImpl implements ITodoService {
             list.add(todo);
         }
         return list;
-    }
+    }*/
 }

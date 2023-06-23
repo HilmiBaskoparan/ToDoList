@@ -1,5 +1,6 @@
 package com.hilmibaskoparan.controller;
 
+import com.hilmibaskoparan.model.Request.TodoAddRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import com.hilmibaskoparan.service.ITodoService;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,8 @@ public class TodoApiImpl implements ITodoApi {
        saves it to the database, and returns a resource link to the created todoTask. */
     @Override
     @PostMapping("/add")
-    public ResponseEntity<TodoEntity> addTodo(@RequestBody TodoEntity todo) {
-        TodoEntity todoEntity = todoService.addTodo(todo);
+    public ResponseEntity<TodoEntity> addTodo(@RequestBody TodoAddRequest request) {
+        TodoEntity todoEntity = todoService.addTodo(request);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("todo", "/api/v1/todo/" + todoEntity.getId().toString());
         return new ResponseEntity<>(todoEntity, httpHeaders, HttpStatus.CREATED);
@@ -87,10 +88,10 @@ public class TodoApiImpl implements ITodoApi {
         return ResponseEntity.ok(todoService.deleteAll());
     }
 
-    // ADD SPEED DATA
+    /*// ADDING 10 RANDOM DATA FOR TEST
     @GetMapping("/speed/data")
     @Override
     public ResponseEntity<List<TodoEntity>> addSpeedData() {
         return ResponseEntity.ok(todoService.addSpeedData());
-    }
+    }*/
 }

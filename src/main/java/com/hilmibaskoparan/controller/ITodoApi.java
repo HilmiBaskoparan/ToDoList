@@ -1,5 +1,6 @@
 package com.hilmibaskoparan.controller;
 
+import com.hilmibaskoparan.model.Request.TodoAddRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -9,7 +10,7 @@ public interface ITodoApi {
 
     // CRUD OPERATIONS
     // CREATE - ADD
-    public ResponseEntity<TodoEntity> addTodo(TodoEntity todo);
+    public ResponseEntity<TodoEntity> addTodo(TodoAddRequest request);
 
     // DELETE BY ID
     public ResponseEntity<TodoEntity> deleteTodo(Long id);
@@ -29,6 +30,6 @@ public interface ITodoApi {
     // DELETE ALL
     public ResponseEntity<String> deleteAll();
 
-    // ADD 10 DATA
-    public ResponseEntity<List<TodoEntity>> addSpeedData();
+    // ADDING 10 RANDOM DATA FOR TEST
+    // public ResponseEntity<List<TodoEntity>> addSpeedData();
 }
