@@ -1,0 +1,17 @@
+./mvnw clean package -DskipTests
+
+docker-compose up               // Start
+docker-compose up -d            // Start
+docker-compose down             // Close
+docker ps
+
+################################################
+# Create a Image via Docker
+docker build .
+
+# Image List
+docker image ls
+
+docker image prune
+
+docker run -p 2222:2222 imageName
