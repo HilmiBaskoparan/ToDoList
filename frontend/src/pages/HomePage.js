@@ -1,7 +1,23 @@
+import { useEffect, useState } from "react";
+
+import { getAllTasksService } from "../service/services";
+
 function HomePage() {
+
+    const [allItems, setAllItems] = useState([]);
+    
+    useEffect(() => {
+        const dataList = async () => {
+          let response = await getAllTasksService();
+          setAllItems(response.data);
+        };
+        dataList();
+      }, []);
     
     return (
         <div className="container m-5 p-2 rounded mx-auto bg-light shadow">
+
+            {/* TITLE */}
             <div className="row m-1 p-4">
                 <div className="col">
                     <div className="p-1 h1 text-center mx-auto display-inline-block">
@@ -38,34 +54,44 @@ function HomePage() {
                 </div>
             </div>
             
-            <div className="row mx-1 px-5 pb-3 w-80">
-                <div className="col mx-auto">
-                    <div className="row px-3 align-items-center todo-item rounded border">
-                        <div className="col-auto m-1 p-0 d-flex align-items-center">
-                            <h2 className="m-0 p-0">
-                                <i className="fa fa-square-o text-primary btn m-0 p-0 d-none" data-toogle="tooltip" data-placement="bottom" title="Mark as Complete"></i>
-                                <input type="checkbox" className="form-control-lg" />
-                            </h2>
-                        </div>
-                        <div className="col px-1 m-1 d-flex align-items-center">
-                            <input type="text" className="form-control border-0 edit-todo-input bg-transparent rounded px-3 text-x1" title="Todo Item #1" readOnly disabled/>
-                        </div>
+            {/* SHOW DATA LIST */}
+            {allItems?.map((task) => (
+                <div className="row mx-1 px-5 pb-3 w-80">
+                    <div className="col mx-auto">
+                        <div className="row px-3 align-items-center todo-item rounded border">
+                            <div className="col-auto m-1 p-0 d-flex align-items-center">
+                                <h2 className="m-0 p-0">
+                                    <i className="fa fa-square-o text-primary btn m-0 p-0 d-none" data-toogle="tooltip" data-placement="bottom" title="Mark as Complete"></i>
+                                    <input type="checkbox" className="form-control-lg" />
+                                </h2>
+                            </div>
+                            <div className="col px-1 m-1 d-flex align-items-center">
+                                <input 
+                                    type="text" 
+                                    className="form-control border-0 edit-todo-input bg-transparent rounded px-3 text-x1" 
+                                    title="Todo Item #1" 
+                                    readOnly 
+                                    disabled
+                                    value={task?.description}/>
+                            </div>
 
-                        <div className="col-auto m-1 p-0 px-3 d-none"></div>
+                            <div className="col-auto m-1 p-0 px-3 d-none"></div>
 
-                        <div className="col-auto m-1 p-0 todo-actions">
-                            <div className="col d-flex align-items-center justify-content-end">
-                                <h5 className="m-0 p-0 px-2">
-                                    <button type="button" className="btn btn-primary">Edit</button>
-                                </h5>
-                                <h5 className="m-0 p-0 px-2">
-                                    <button type="button" className="btn btn-danger">Delete</button>
-                                </h5>
+                            <div className="col-auto m-1 p-0 todo-actions">
+                                <div className="col d-flex align-items-center justify-content-end">
+                                    <h5 className="m-0 p-0 px-2">
+                                        <button type="button" className="btn btn-primary">Edit</button>
+                                    </h5>
+                                    <h5 className="m-0 p-0 px-2">
+                                        <button type="button" className="btn btn-danger">Delete</button>
+                                    </h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            ))};
+            
             <div className="mt-4 mb-4 col d-flex align-items-center justify-content-center">
                 <h5 className="m-0 p-0 px-2">
                     <button type="button" className="btn btn-danger">Delete Done Tasks</button>
