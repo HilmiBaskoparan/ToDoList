@@ -11,5 +11,13 @@ public interface ITodoRepository extends CrudRepository<TodoEntity, Long> {
     @Query(value="SELECT * FROM todo_list ",nativeQuery=true)
     List<TodoEntity> findAllTodos();
 
+    // List of Completed Tasks
+    @Query(value="SELECT * FROM todo_list WHERE is_done=true ",nativeQuery=true)
+    List<TodoEntity> findCompletedTodos();
+
+    // List of Uncompleted Tasks
+    @Query(value="SELECT * FROM todo_list  WHERE is_done=false",nativeQuery=true)
+    List<TodoEntity> findUncompletedTodos();
+
     // List<TodoEntity> findByUserName(String userName);
 }
