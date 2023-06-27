@@ -57,7 +57,7 @@ public class TodoServiceImpl implements ITodoService {
     @Transactional
     @Override
     public TodoEntity updateById(Long id, TodoUpdateRequest request) {
-        TodoEntity todoFromDb = todoRepository.findById(id).get();
+        TodoEntity todoFromDb = todoRepository.findById(id).orElse(null);
         if (Objects.isNull(todoFromDb)) {
             log.error("Todo not found.");
             throw new BadRequestException("Todo is not found.");
@@ -105,6 +105,27 @@ public class TodoServiceImpl implements ITodoService {
         todoRepository.deleteAll();
         log.info("All Todo Tasks are deleted.");
         return "All Todo Tasks are deleted.";
+    }
+
+    @Override
+    public List<TodoEntity> listCompleted() {
+        return todoRepository.findCompletedTodos();
+    }
+
+    @Override
+    public List<TodoEntity> listUncompleted() {
+        return todoRepository.findUncompletedTodos();
+    }
+
+    @Transactional
+    @Override
+    public String deleteCompletedTodos(){
+        List<TodoEntity> completedTasks = todoRepository.findCompletedTodos();
+        completedTasks.forEach(task->{
+            todoRepository.deleteById(task.getId());
+        });
+        log.info("All Completed Todo Tasks are deleted.");
+        return "All Completed Todo Tasks are deleted.";
     }
 
     /* ADDING 10 RANDOM DATA FOR TEST
