@@ -20,6 +20,12 @@ public interface ITodoService {
 
     String deleteAll();
 
+    List<TodoEntity> listCompleted();
+
+    List<TodoEntity> listUncompleted();
+
+    String deleteCompletedTodos();
+
     // LIST BY USERNAME
     // public List<TodoEntity> listByUserName(String userName);
 
