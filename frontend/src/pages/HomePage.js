@@ -213,22 +213,6 @@ function HomePage() {
         <div className="row mx-1 px-5 pb-3 w-80">
           <div className="col mx-auto">
             <div className="row px-3 align-items-center todo-item rounded border">
-              <div className="col-auto m-1 p-0 d-flex align-items-center">
-                <h2 className="m-0 p-0">
-                  <i
-                    className="fa fa-square-o text-primary btn m-0 p-0 d-none"
-                    data-toogle="tooltip"
-                    data-placement="bottom"
-                    title="Mark as Complete"
-                  ></i>
-                  <input
-                    type="checkbox"
-                    className="form-control-lg"
-                    checked={task.isDone}
-                    onChange={() => updateIsDone(task)}
-                  ></input>
-                </h2>
-              </div>
               <div className="col px-1 m-1 d-flex align-items-center">
                 <input
                   style={
@@ -249,25 +233,36 @@ function HomePage() {
 
               <div className="col-auto m-1 p-0 todo-actions">
                 <div className="col d-flex align-items-center justify-content-end">
+                  {/* CHECKBOX */}
+                  <h3 className="m-1 p-0">
+                    <i
+                      className="fa fa-square-o text-primary btn mb-0 p-0 d-none"
+                      data-toogle="tooltip"
+                      data-placement="bottom"
+                      title="Mark as Complete"
+                    ></i>
+                    <input
+                      type="checkbox"
+                      className="form-control-md form-check-input mb-1"
+                      checked={task.isDone}
+                      onChange={() => updateIsDone(task)}
+                    ></input>
+                  </h3>
                   {/* EDIT BUTTON */}
                   <h5 className="m-0 p-0 px-2">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
+                    <i
+                      className="fa-solid fa-pen fa-lg"
+                      style={{ color: "#ffd600" }}
                       onClick={() => openPopup(task)}
-                    >
-                      Edit
-                    </button>
+                    ></i>
                   </h5>
                   {/* DELETE BUTTON */}
                   <h5 className="m-0 p-0 px-2">
-                    <button
-                      type="button"
-                      className="btn btn-danger"
+                    <i
+                      className="fa-solid fa-trash fa-lg"
+                      style={{ color: "#d50000" }}
                       onClick={() => deleteTask(task)}
-                    >
-                      Delete
-                    </button>
+                    ></i>
                   </h5>
                 </div>
               </div>
