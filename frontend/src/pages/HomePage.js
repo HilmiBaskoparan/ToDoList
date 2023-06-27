@@ -30,36 +30,48 @@ function HomePage() {
 
   // ADD NEW TASK
   const addNewTask = async () => {
-    await addTaskService({ description: newTaskInput }).then((response) => {
-      const newAllItems = [...allItems];
-      newAllItems.push(response.data);
-      setAllItems(newAllItems);
-    });
+    await addTaskService({ description: newTaskInput })
+      .then((response) => {
+        const newAllItems = [...allItems];
+        newAllItems.push(response.data);
+        setAllItems(newAllItems);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
   };
 
   // DELETE TASK
   const deleteTask = async (task) => {
-    await deleteTaskService(task?.id).then((response) => {
-      const newList = allItems.filter(
-        (task) => task?.id !== response?.data?.id
-      );
-      setAllItems(newList);
-    });
+    await deleteTaskService(task?.id)
+      .then((response) => {
+        const newList = allItems.filter(
+          (task) => task?.id !== response?.data?.id
+        );
+        setAllItems(newList);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
   };
 
   // UPDATE TASK
   const updateDescription = async () => {
     await updateTaskService(currentTodo?.id, {
       description: currentTodo?.description,
-    }).then((response) => {
-      const newList = allItems?.map((variable) => {
-        if (variable?.id === response?.data?.id) {
-          return { ...variable, description: response?.data?.description };
-        }
-        return variable;
+    })
+      .then((response) => {
+        const newList = allItems?.map((variable) => {
+          if (variable?.id === response?.data?.id) {
+            return { ...variable, description: response?.data?.description };
+          }
+          return variable;
+        });
+        setAllItems(newList);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
       });
-      setAllItems(newList);
-    });
     setIsOpen(false);
   };
 
@@ -70,6 +82,8 @@ function HomePage() {
       ...currentTodo,
       id: todo?.id,
       description: todo?.description,
+    }).catch((error) => {
+      window.alert(error.response.data.message);
     });
   };
   // Close Popup
@@ -89,8 +103,8 @@ function HomePage() {
         });
         setAllItems(newList);
       })
-      .catch((err) => {
-        console.log(err.response.data.message);
+      .catch((error) => {
+        console.log(error.response.data.message);
       });
   };
 
@@ -110,17 +124,25 @@ function HomePage() {
 
   // DELETE ALL TASKS
   const deleteAllTasks = async () => {
-    await deleteAllService().then((response) => {
-      setAllItems([]);
-    });
+    await deleteAllService()
+      .then((response) => {
+        setAllItems([]);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
   };
 
   // DELETE COMPLEETED TASKS
   const deleteCompletedTasks = async () => {
-    await deleteCompletedTasksService().then((response) => {
-      const newList = allItems.filter((element) => element?.isDone === false);
-      setAllItems(newList);
-    });
+    await deleteCompletedTasksService()
+      .then((response) => {
+        const newList = allItems.filter((element) => element?.isDone === false);
+        setAllItems(newList);
+      })
+      .catch((error) => {
+        window.alert(error.response.data.message);
+      });
   };
 
   return (
@@ -309,12 +331,20 @@ function HomePage() {
       {/* DELETE DONE AND DELETE ALL BUTTONS */}
       <div className="mt-4 mb-4 col d-flex align-items-center justify-content-center">
         <h5 className="m-0 p-0 px-2">
-          <button type="button" className="btn btn-danger" onClick={deleteCompletedTasks}>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={deleteCompletedTasks}
+          >
             Delete Done Tasks
           </button>
         </h5>
         <h5 className="m-0 p-0 px-2">
-          <button type="button" className="btn btn-danger" onClick={deleteAllTasks}>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={deleteAllTasks}
+          >
             Delete All Tasks
           </button>
         </h5>
