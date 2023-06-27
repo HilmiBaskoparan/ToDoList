@@ -8,7 +8,9 @@ import {
   deleteTaskService,
   updateTaskService,
   getCompletedTasksService,
-  getUncompletedTasksService
+  getUncompletedTasksService,
+  deleteAllService,
+  deleteCompletedTasksService,
 } from "../service/services";
 
 function HomePage() {
@@ -106,6 +108,21 @@ function HomePage() {
     setAllItems(response.data);
   };
 
+  // DELETE ALL TASKS
+  const deleteAllTasks = async () => {
+    await deleteAllService().then((response) => {
+      setAllItems([]);
+    });
+  };
+
+  // DELETE COMPLEETED TASKS
+  const deleteCompletedTasks = async () => {
+    await deleteCompletedTasksService().then((response) => {
+      const newList = allItems.filter((element) => element?.isDone === false);
+      setAllItems(newList);
+    });
+  };
+
   return (
     <div className="container m-5 p-2 rounded mx-auto bg-light shadow">
       {/* TITLE */}
@@ -150,9 +167,24 @@ function HomePage() {
           <h2>TodoList</h2>
         </div>
         <div className="row">
-          <button className="btn btn-primary btn-md col m-3" onClick={getAllTasks}>All</button>
-          <button className="btn btn-primary btn-md col m-3" onClick={getCompletedTasks}>Completed</button>
-          <button className="btn btn-primary btn-md col m-3" onClick={getUncompletedTasks}>InCompleted</button>
+          <button
+            className="btn btn-primary btn-md col m-3"
+            onClick={getAllTasks}
+          >
+            All
+          </button>
+          <button
+            className="btn btn-primary btn-md col m-3"
+            onClick={getCompletedTasks}
+          >
+            Completed
+          </button>
+          <button
+            className="btn btn-primary btn-md col m-3"
+            onClick={getUncompletedTasks}
+          >
+            InCompleted
+          </button>
         </div>
       </div>
 
@@ -277,12 +309,12 @@ function HomePage() {
       {/* DELETE DONE AND DELETE ALL BUTTONS */}
       <div className="mt-4 mb-4 col d-flex align-items-center justify-content-center">
         <h5 className="m-0 p-0 px-2">
-          <button type="button" className="btn btn-danger">
+          <button type="button" className="btn btn-danger" onClick={deleteCompletedTasks}>
             Delete Done Tasks
           </button>
         </h5>
         <h5 className="m-0 p-0 px-2">
-          <button type="button" className="btn btn-danger">
+          <button type="button" className="btn btn-danger" onClick={deleteAllTasks}>
             Delete All Tasks
           </button>
         </h5>
