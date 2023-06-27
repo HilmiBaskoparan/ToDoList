@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-
+// Popup Modal
+import Popup from "../component/Popup";
+// SERVICES
 import { 
     getAllTasksService, 
     addTaskService,
@@ -10,7 +12,9 @@ function HomePage() {
 
     const [allItems, setAllItems] = useState([]);
     const [newTaskInput, setNewTaskInput] = useState("");
-    
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentTodo, setCurrentTodo] = useState({ id: 0, description: "" });
+
     // GET TODO LIST
     useEffect(() => {
         const dataList = async () => {
@@ -41,7 +45,38 @@ function HomePage() {
           });
       };
 
-      // <Update Todo Task When Checked>
+      // UPDATE TASK
+      const updateDescription = async () => {
+        await updateTaskService(currentTodo?.id, {
+          description: currentTodo?.description,
+        })
+          .then((response) => {
+            const newList = allItems?.map((variable) => {
+              if (variable?.id === response?.data?.id) {
+                return { ...variable, description: response?.data?.description };
+              }
+              return variable;
+            });
+            setAllItems(newList);
+          })
+        setIsOpen(false);
+      };
+
+      // Open Popup
+      const openPopup = (todo) => {
+        setIsOpen(true);
+        setCurrentTodo({
+          ...currentTodo,
+          id: todo?.id,
+          description: todo?.description,
+        });
+      };
+      // Close Popup
+      const closePopup = () => {
+        setIsOpen(false);
+      };
+      
+      // Update Todo Task When Checked
       const updateIsDone = async (task) => {
         await updateTaskService(task?.id, { isDone: !task?.isDone })
           .then((response) => {
@@ -136,8 +171,12 @@ function HomePage() {
 
                             <div className="col-auto m-1 p-0 todo-actions">
                                 <div className="col d-flex align-items-center justify-content-end">
+                                  {/* EDIT BUTTON */}
                                     <h5 className="m-0 p-0 px-2">
-                                        <button type="button" className="btn btn-primary">Edit</button>
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-primary"
+                                            onClick={() => openPopup(task)}>Edit</button>
                                     </h5>
                                     {/* DELETE BUTTON */}
                                     <h5 className="m-0 p-0 px-2">
@@ -151,8 +190,46 @@ function HomePage() {
                         </div>
                     </div>
                 </div>
-            ))};
+            ))}
             
+            <div>
+                {isOpen && (
+                    <Popup
+                    content={
+                        <>
+                            <div className="container">
+                                <b className="text-primary">UPDATE YOUR TODO</b>
+                                <div className="row px-3 align-items-center todo-item rounded border mt-4 mb-4">
+                                    <textarea
+                                        type="input"
+                                        rows="2"
+                                        className="form-control border-0 edit-todo-input bg-transparent rounded px-3 text-x1"
+                                        placeholder="Please write your todo description..."
+                                        value={currentTodo?.description}
+                                        onChange={(value) =>
+                                            setCurrentTodo({
+                                              ...currentTodo,
+                                              description: value.target.value,
+                                            })
+                                          }
+                                    />
+                                </div>
+                                <div className="col d-flex align-items-center justify-content-end">
+                                    <h5 className="m-0 p-0 px-2">
+                                        <button type="button" className="btn btn-danger" onClick={closePopup}>Close</button>
+                                    </h5>
+                                    <h5 className="m-0 p-0 px-2">
+                                        <button type="button"className="btn btn-primary" onClick={updateDescription}>Save</button>
+                                    </h5>
+                                </div>
+                            </div>
+                        </>
+                    }
+                />
+                )}
+                
+            </div>
+
             <div className="mt-4 mb-4 col d-flex align-items-center justify-content-center">
                 <h5 className="m-0 p-0 px-2">
                     <button type="button" className="btn btn-danger">Delete Done Tasks</button>
