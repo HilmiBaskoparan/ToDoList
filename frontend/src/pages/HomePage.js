@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 import { 
     getAllTasksService, 
-    addTaskService, 
+    addTaskService,
+    deleteTaskService,
     updateTaskService } from "../service/services";
 
 function HomePage() {
@@ -19,7 +20,6 @@ function HomePage() {
         dataList();
       }, []);
 
-
       // ADD NEW TASK
       const addNewTask = async () => {
         await addTaskService({ description: newTaskInput })
@@ -27,6 +27,17 @@ function HomePage() {
             const newAllItems = [...allItems];
             newAllItems.push(response.data);
             setAllItems(newAllItems);
+          });
+      };
+
+      // DELETE TASK
+      const deleteTask = async (task) => {
+        await deleteTaskService(task?.id)
+          .then((response) => {
+            const newList = allItems.filter(
+              (task) => task?.id !== response?.data?.id
+            );
+            setAllItems(newList);
           });
       };
 
@@ -128,8 +139,12 @@ function HomePage() {
                                     <h5 className="m-0 p-0 px-2">
                                         <button type="button" className="btn btn-primary">Edit</button>
                                     </h5>
+                                    {/* DELETE BUTTON */}
                                     <h5 className="m-0 p-0 px-2">
-                                        <button type="button" className="btn btn-danger">Delete</button>
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-danger"
+                                            onClick={() => deleteTask(task)}>Delete</button>
                                     </h5>
                                 </div>
                             </div>
