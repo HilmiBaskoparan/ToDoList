@@ -9,8 +9,8 @@ Backend is developed using Java, Spring Boot and Frontend is developed using Rea
 
 ### How to Run Application
 
-1. Open Intellij IDEA9
-2. Install node to run9 react app (frontend) and maven to run spring boot app (backend).
+1. Open Intellij IDEA
+2. Install node to run react app (frontend) and maven to run spring boot app (backend).
 3. In /frontend directory, run the application
 4. Open your browser and browse to http://localhost:3000
 
@@ -81,15 +81,14 @@ ITodoApiImpl
 ---
 #  Todo List Project - (27 June 2023)
 * [GitHub](https://github.com/HilmiBaskoparan/ToDoList)
-*
 
 ### Requirements
-Java 17
-Intellij IDEA Ultimate
-Visual Studio Code
-Node JS
-Postman
-Docker Desktop
+- Java 17
+- Intellij IDEA Ultimate
+- Visual Studio Code
+- Node JS
+- Postman
+- Docker Desktop
 
 ---
 
@@ -114,48 +113,46 @@ Docker Desktop
 * Spring MVC
 * Spring Data JPA
 * Spring Security
-* 
 
 ---
 
 ## Libraries
-Thymeleaf
-Lombok
-Validation
+- Thymeleaf
+- Lombok
+- Validation
 
 ## Database
-H2 Database
-Mysql
+- H2 Database
+- Mysql
 
 ---
 ## dependency
-Spring Web
-Spring Data JPA
-Spring Rest
-Spring Security
+- Spring Web
+- Spring Data JPA
+- Spring Rest
+- Spring Security
 
 ---
 # Spring Tools
-Spring Boot DevTools
-Spring Configuration Processor
-Spring Boot Actuator
+- Spring Boot DevTools
+- Spring Configuration Processor
+- Spring Boot Actuator
 
 ---
 
 ## Dockerize
-./mvnw clean package -DskipTests
-docker-compose up               // Start
-docker-compose up -d            // Start
-docker-compose down             // Close
+`./mvnw clean package -DskipTests`
+`docker-compose up`     for Start
+`docker-compose up -d`  for Start
+`docker-compose down`   for Close
 
 ## NPM Operations
-npx create-react-app frontend
-cd frontend
-npm start
-code .
+`npx create-react-app frontend`
+`cd frontend`
+`npm start`
+`code .`
 
 ## NPM INSTALLS
-npm i axios
-npm i bootstrap
-npm i gsap
-
+- npm i axios
+- npm i bootstrap
+- npm i gsap
