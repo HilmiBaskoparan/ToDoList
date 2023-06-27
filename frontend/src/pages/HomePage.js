@@ -286,7 +286,7 @@ function HomePage() {
                     <div className="row px-3 align-items-center todo-item rounded border mt-4 mb-4">
                       <textarea
                         type="input"
-                        rows="2"
+                        rows="1"
                         className="form-control border-0 edit-todo-input bg-transparent rounded px-3 text-x1"
                         placeholder="Please write your todo description..."
                         value={currentTodo?.description}
@@ -311,7 +311,7 @@ function HomePage() {
                       <h5 className="m-0 p-0 px-2">
                         <button
                           type="button"
-                          className="btn btn-info"
+                          className="btn btn-success"
                           onClick={updateDescription}
                         >
                           Save
@@ -326,25 +326,22 @@ function HomePage() {
         </div>
 
         {/* DELETE DONE AND DELETE ALL BUTTONS */}
-        <div className="mt-4 mb-4 col d-flex align-items-center justify-content-center">
-          <h5 className="m-0 p-0 px-2">
-            <button
-              type="button"
-              className="btn btn-danger p-2"
-              onClick={deleteCompletedTasks}
-            >
-              Delete Done Tasks
-            </button>
-          </h5>
-          <h5 className="m-0 p-0 px-2">
-            <button
-              type="button"
-              className="btn btn-danger p-2"
-              onClick={deleteAllTasks}
-            >
-              Delete All Tasks
-            </button>
-          </h5>
+        <div className="row container mt-4 mb-4 align-items-center justify-content-center">
+          <button
+            type="button"
+            className="btn btn-danger col-5 p-2 m-1"
+            onClick={deleteCompletedTasks}
+          >
+            Delete Done Tasks
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-danger col-5 p-2 m-1"
+            onClick={deleteAllTasks}
+          >
+            Delete All Tasks
+          </button>
         </div>
       </div>
     </>
