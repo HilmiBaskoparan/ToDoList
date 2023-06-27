@@ -128,6 +128,7 @@ function HomePage() {
 
       <div className="p-2 mx-4 border-bottom"></div>
 
+      {/* FILTERING OF LIST OPTIONS */}
       <div className="row m-1 p-3 px-5 justify-content-end">
         <div class="d-flex justify-content-center">
           <h2>TodoList</h2>
@@ -209,6 +210,7 @@ function HomePage() {
         </div>
       ))}
 
+      {/* POPUP MODAL */}
       <div>
         {isOpen && (
           <Popup
@@ -258,6 +260,7 @@ function HomePage() {
         )}
       </div>
 
+      {/* DELETE DONE AND DELETE ALL BUTTONS */}
       <div className="mt-4 mb-4 col d-flex align-items-center justify-content-center">
         <h5 className="m-0 p-0 px-2">
           <button type="button" className="btn btn-danger">
