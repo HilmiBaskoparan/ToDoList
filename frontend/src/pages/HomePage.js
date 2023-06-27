@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAllTasksService } from "../service/services";
+import { getAllTasksService, updateTaskService } from "../service/services";
 
 function HomePage() {
 
@@ -13,6 +13,22 @@ function HomePage() {
         };
         dataList();
       }, []);
+
+      const updateIsDone = async (task) => {
+        await updateTaskService(task?.id, { isDone: !task?.isDone })
+          .then((response) => {
+            const newList = allItems?.map((variable) => {
+              if (variable?.id === response?.data?.id) {
+                return { ...variable, isDone: response?.data?.isDone };
+              }
+              return variable;
+            });
+            setAllItems(newList);
+          })
+          .catch((err) => {
+            console.log(err.response.data.message);
+          });
+      };
     
     return (
         <div className="container m-5 p-2 rounded mx-auto bg-light shadow">
@@ -62,11 +78,18 @@ function HomePage() {
                             <div className="col-auto m-1 p-0 d-flex align-items-center">
                                 <h2 className="m-0 p-0">
                                     <i className="fa fa-square-o text-primary btn m-0 p-0 d-none" data-toogle="tooltip" data-placement="bottom" title="Mark as Complete"></i>
-                                    <input type="checkbox" className="form-control-lg" />
+                                    <input 
+                                        type="checkbox" 
+                                        className="form-control-lg"
+                                        checked={task.isDone}
+                                        onChange={() => updateIsDone(task)}></input>
                                 </h2>
                             </div>
                             <div className="col px-1 m-1 d-flex align-items-center">
                                 <input 
+                                    style={
+                                        task?.isDone ? {textDecoration: "line-through", color: "red"} : {textDecoration: "none"}
+                                    }
                                     type="text" 
                                     className="form-control border-0 edit-todo-input bg-transparent rounded px-3 text-x1" 
                                     title="Todo Item #1" 
