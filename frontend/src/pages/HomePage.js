@@ -7,6 +7,8 @@ import {
   addTaskService,
   deleteTaskService,
   updateTaskService,
+  getCompletedTasksService,
+  getUncompletedTasksService
 } from "../service/services";
 
 function HomePage() {
@@ -90,6 +92,20 @@ function HomePage() {
       });
   };
 
+  // FILTER LIST (All, Completed, Uncompleted)
+  const getAllTasks = async () => {
+    let response = await getAllTasksService();
+    setAllItems(response.data);
+  };
+  const getCompletedTasks = async () => {
+    let response = await getCompletedTasksService();
+    setAllItems(response.data);
+  };
+  const getUncompletedTasks = async () => {
+    let response = await getUncompletedTasksService();
+    setAllItems(response.data);
+  };
+
   return (
     <div className="container m-5 p-2 rounded mx-auto bg-light shadow">
       {/* TITLE */}
@@ -134,11 +150,9 @@ function HomePage() {
           <h2>TodoList</h2>
         </div>
         <div className="row">
-          <button className="btn btn-primary btn-md col m-3">All</button>
-          <button className="btn btn-primary btn-md col m-3">Completed</button>
-          <button className="btn btn-primary btn-md col m-3">
-            InCompleted
-          </button>
+          <button className="btn btn-primary btn-md col m-3" onClick={getAllTasks}>All</button>
+          <button className="btn btn-primary btn-md col m-3" onClick={getCompletedTasks}>Completed</button>
+          <button className="btn btn-primary btn-md col m-3" onClick={getUncompletedTasks}>InCompleted</button>
         </div>
       </div>
 
