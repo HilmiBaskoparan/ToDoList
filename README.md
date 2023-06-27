@@ -142,14 +142,20 @@ ITodoApiImpl
 
 ## Dockerize
 `./mvnw clean package -DskipTests`
+
 `docker-compose up`     for Start
+
 `docker-compose up -d`  for Start
+
 `docker-compose down`   for Close
 
 ## NPM Operations
 `npx create-react-app frontend`
+
 `cd frontend`
+
 `npm start`
+
 `code .`
 
 ## NPM INSTALLS
