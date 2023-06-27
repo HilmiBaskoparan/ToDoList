@@ -159,7 +159,10 @@ function HomePage() {
         <div className="row m-0 p-3">
           <div className="col col-11 mx-auto">
             <div className="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
-              <div className="col">
+              <div className="col col-auto bg-info text-white p-2 m-0">
+                <i class="fa-solid fa-list-check fa-xl"></i>
+              </div>
+              <div className="col-11">
                 <input
                   type="text"
                   className="form-control form-control-lg border-0 add-todo-input bg-transparent rounded"
@@ -167,15 +170,15 @@ function HomePage() {
                   onChange={(value) => setNewTaskInput(value.target.value)}
                 />
               </div>
-              <div className="col-auto px-0 mx-0 mr-2">
-                <button
-                  type="button"
-                  className="btn btn-primary btn-lg btn-block"
-                  onClick={addNewTask}
-                >
-                  Add New Task
-                </button>
-              </div>
+            </div>
+            <div className="row px-0 mx-0 mt-4">
+              <button
+                type="button"
+                className="btn btn-info btn-lg btn-block"
+                onClick={addNewTask}
+              >
+                Add New Task
+              </button>
             </div>
           </div>
         </div>
@@ -189,19 +192,19 @@ function HomePage() {
           </div>
           <div className="row">
             <button
-              className="btn btn-primary btn-md col m-3"
+              className="btn btn-info btn-md col m-3"
               onClick={getAllTasks}
             >
               All
             </button>
             <button
-              className="btn btn-primary btn-md col m-3"
+              className="btn btn-info btn-md col m-3"
               onClick={getCompletedTasks}
             >
               Completed
             </button>
             <button
-              className="btn btn-primary btn-md col m-3"
+              className="btn btn-info btn-md col m-3"
               onClick={getUncompletedTasks}
             >
               InCompleted
@@ -237,7 +240,7 @@ function HomePage() {
                     {/* CHECKBOX */}
                     <h3 className="m-1 p-0">
                       <i
-                        className="fa fa-square-o text-primary btn mb-0 p-0 d-none"
+                        className="fa fa-square-o text-info btn mb-0 p-0 d-none"
                         data-toogle="tooltip"
                         data-placement="bottom"
                         title="Mark as Complete"
@@ -279,7 +282,7 @@ function HomePage() {
               content={
                 <>
                   <div className="container">
-                    <b className="text-primary">UPDATE YOUR TODO</b>
+                    <b className="text-info">UPDATE YOUR TODO</b>
                     <div className="row px-3 align-items-center todo-item rounded border mt-4 mb-4">
                       <textarea
                         type="input"
@@ -308,7 +311,7 @@ function HomePage() {
                       <h5 className="m-0 p-0 px-2">
                         <button
                           type="button"
-                          className="btn btn-primary"
+                          className="btn btn-info"
                           onClick={updateDescription}
                         >
                           Save
