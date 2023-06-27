@@ -82,8 +82,6 @@ function HomePage() {
       ...currentTodo,
       id: todo?.id,
       description: todo?.description,
-    }).catch((error) => {
-      window.alert(error.response.data.message);
     });
   };
   // Close Popup
