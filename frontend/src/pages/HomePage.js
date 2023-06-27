@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { getAllTasksService, updateTaskService } from "../service/services";
+import { 
+    getAllTasksService, 
+    addTaskService, 
+    updateTaskService } from "../service/services";
 
 function HomePage() {
 
     const [allItems, setAllItems] = useState([]);
+    const [newTaskInput, setNewTaskInput] = useState("");
     
+    // GET TODO LIST
     useEffect(() => {
         const dataList = async () => {
           let response = await getAllTasksService();
@@ -14,6 +19,18 @@ function HomePage() {
         dataList();
       }, []);
 
+
+      // ADD NEW TASK
+      const addNewTask = async () => {
+        await addTaskService({ description: newTaskInput })
+          .then((response) => {
+            const newAllItems = [...allItems];
+            newAllItems.push(response.data);
+            setAllItems(newAllItems);
+          });
+      };
+
+      // <Update Todo Task When Checked>
       const updateIsDone = async (task) => {
         await updateTaskService(task?.id, { isDone: !task?.isDone })
           .then((response) => {
@@ -41,6 +58,8 @@ function HomePage() {
                     </div>
                 </div>
             </div>
+
+            {/* ADD NEW TASK */}
             <div className="row m-1 p-3">
                 <div className="col col-11 mx-auto">
                     <div className="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
@@ -48,10 +67,14 @@ function HomePage() {
                             <input 
                                 type="text" 
                                 className="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" 
-                                placeholder="New Todo"/>
+                                placeholder="New Todo"
+                                onChange={(value) => setNewTaskInput(value.target.value)}/>
                         </div>
                         <div className="col-auto px-0 mx-0 mr-2">
-                            <button type="button" className="btn btn-primary btn-lg btn-block">Add New Task</button>
+                            <button 
+                                type="button" 
+                                className="btn btn-primary btn-lg btn-block"
+                                onClick={addNewTask}>Add New Task</button>
                         </div>
                     </div>
                 </div>
