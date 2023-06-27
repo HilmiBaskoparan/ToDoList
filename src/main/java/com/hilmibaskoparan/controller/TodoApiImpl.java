@@ -17,7 +17,7 @@ import java.util.List;
 @Log4j2
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/todo")
 public class TodoApiImpl implements ITodoApi {
 
@@ -66,10 +66,29 @@ public class TodoApiImpl implements ITodoApi {
         return new ResponseEntity<>(todoService.finById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/delete/all")
+    @DeleteMapping("/delete/all")
     @Override
     public ResponseEntity<String> deleteAll() {
         return ResponseEntity.ok(todoService.deleteAll());
+    }
+
+    @Override
+    @GetMapping("/list/completed")
+    public ResponseEntity<List<TodoEntity>> listCompletedTasks() {
+        List<TodoEntity> todoList = todoService.listCompleted();
+        return new ResponseEntity<>(todoList, HttpStatus.OK);
+    }
+
+    @Override
+    @GetMapping("/list/uncompleted")
+    public ResponseEntity<List<TodoEntity>> listUncompletedTasks() {
+        List<TodoEntity> todoList = todoService.listUncompleted();
+        return new ResponseEntity<>(todoList, HttpStatus.OK);
+    }
+    @Override
+    @DeleteMapping("/delete/completed")
+    public ResponseEntity<String> deleteDoneTasks() {
+        return ResponseEntity.ok(todoService.deleteCompletedTodos());
     }
 
     /* LIST BY USERNAME
