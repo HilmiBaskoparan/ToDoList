@@ -4,6 +4,7 @@ import com.hilmibaskoparan.model.Request.TodoAddRequest;
 import com.hilmibaskoparan.model.Request.TodoUpdateRequest;
 import com.hilmibaskoparan.model.entity.TodoEntity;
 import com.hilmibaskoparan.service.ITodoService;
+import com.hilmibaskoparan.util.FrontendURL;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +18,7 @@ import java.util.List;
 @Log4j2
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = FrontendURL.FRONTEND_URL)
 @RequestMapping("/api/v1/todo")
 public class TodoApiImpl implements ITodoApi {
 

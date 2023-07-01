@@ -1,5 +1,6 @@
 package com.hilmibaskoparan.error;
 
+import com.hilmibaskoparan.util.FrontendURL;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -18,7 +19,7 @@ import java.util.Map;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = FrontendURL.FRONTEND_URL)
 public class CustomErrorHandleWebRequest implements ErrorController {
 
     // You can this class for Error Handling at API Errors.
