@@ -35,6 +35,11 @@ function HomePage() {
     notyf.success("New task is added.")
   }
 
+  // Toast for Update Task
+  const updateTaskToast = () => {
+    notyf.success("Task is updated.")
+  }
+
   // GET TODO LIST
   // React her render (yenileme) sonrası useEffect fonksiyonu çalıştıtır. Her render sonrası liste yenilenir. 
   useEffect(() => {
@@ -86,6 +91,7 @@ function HomePage() {
           return variable;
         });
         setAllItems(newList);
+        updateTaskToast();
       })
       .catch((error) => {
         window.alert(error.response.data.message);
