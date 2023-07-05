@@ -1,0 +1,15 @@
+package com.hilmibaskoparan.audit;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+
+//AuditorAware: For the user in the system to log
+@Configuration
+public class AuditorAwareBean {
+
+    @Bean
+    public AuditorAware<String> auditorAwareMethod(){
+        return new AuditorAwareImpl();
+    }
+}
