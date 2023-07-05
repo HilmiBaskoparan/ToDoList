@@ -27,17 +27,52 @@ function HomePage() {
     position: {
       x:'right',
       y:"top"
-    }
+    },
+    duration:1000
   });
 
   // Toast for Add New Task
   const addNewTaskToast = () => {
-    notyf.success("New task is added.")
+    notyf.success("New task is added.");
   }
-
+  // Toast for Delete Task
+  const deleteTaskToast = () => {
+    notyf.error("Task is deleted.");
+  }
   // Toast for Update Task
   const updateTaskToast = () => {
-    notyf.success("Task is updated.")
+    notyf.success("Task is updated.");
+  }
+  // Toast for Delete All Tasks
+  const deleteAllTasksToast = () => {
+    let notyf = new Notyf({
+      position:{
+        x:"right",
+        y:"bottom"
+      },
+      duration:1000,
+      types:[
+        {
+          type:'custom',
+          background:'black'
+        }
+      ]
+    });
+    notyf.open({
+      type:'custom',
+      message:'<b>All Tasks</b> are deleted !!!'
+    });
+  }
+  // Toast for Delete Done Tasks
+  const deleteDoneTasksToast = () => {
+    let notyf = new Notyf({
+      position:{
+        x:"right",
+        y:"bottom"
+      },
+      duration:1000
+    });
+    notyf.error("Done Tasks are deleted.");
   }
 
   // GET TODO LIST
@@ -72,6 +107,7 @@ function HomePage() {
           (task) => task?.id !== response?.data?.id
         );
         setAllItems(newList);
+        deleteTaskToast();
       })
       .catch((error) => {
         window.alert(error.response.data.message);
@@ -149,6 +185,7 @@ function HomePage() {
     await deleteAllService()
       .then((response) => {
         setAllItems([]);
+        deleteAllTasksToast();
       })
       .catch((error) => {
         window.alert(error.response.data.message);
@@ -161,6 +198,7 @@ function HomePage() {
       .then((response) => {
         const newList = allItems.filter((element) => element?.isDone === false);
         setAllItems(newList);
+        deleteDoneTasksToast();
       })
       .catch((error) => {
         window.alert(error.response.data.message);
