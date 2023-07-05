@@ -20,6 +20,7 @@ function HomePage() {
   const [currentTodo, setCurrentTodo] = useState({ id: 0, description: "" });
 
   // GET TODO LIST
+  // React her render (yenileme) sonrası useEffect fonksiyonu çalıştıtır. Her render sonrası liste yenilenir. 
   useEffect(() => {
     const dataList = async () => {
       let response = await getAllTasksService();
@@ -207,7 +208,7 @@ function HomePage() {
               className="btn btn-info btn-md col m-3"
               onClick={getUncompletedTasks}
             >
-              InCompleted
+              Uncompleted
             </button>
           </div>
         </div>
