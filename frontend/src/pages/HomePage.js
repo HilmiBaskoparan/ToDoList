@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 // Popup Modal
 import Popup from "../component/Popup";
+// Notyf
+import {Notyf} from 'notyf';
+import 'notyf/notyf.min.css';
 // SERVICES
 import {
   getAllTasksService,
@@ -19,6 +22,19 @@ function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({ id: 0, description: "" });
 
+  // Notyf 
+  const notyf = new Notyf({
+    position: {
+      x:'right',
+      y:"top"
+    }
+  });
+
+  // Toast for Add New Task
+  const addNewTaskToast = () => {
+    notyf.success("New task is added.")
+  }
+
   // GET TODO LIST
   // React her render (yenileme) sonrası useEffect fonksiyonu çalıştıtır. Her render sonrası liste yenilenir. 
   useEffect(() => {
@@ -36,6 +52,7 @@ function HomePage() {
         const newAllItems = [...allItems];
         newAllItems.push(response.data);
         setAllItems(newAllItems);
+        addNewTaskToast();
       })
       .catch((error) => {
         window.alert(error.response.data.message);
@@ -161,7 +178,7 @@ function HomePage() {
           <div className="col col-11 mx-auto">
             <div className="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
               <div className="col col-auto bg-info text-white p-2 m-0">
-                <i class="fa-solid fa-list-check fa-xl"></i>
+                <i className="fa-solid fa-list-check fa-xl"></i>
               </div>
               <div className="col-11">
                 <input
@@ -188,7 +205,7 @@ function HomePage() {
       <div className="container m-4 p-2 rounded mx-auto bg-light shadow border">
         {/* FILTERING OF LIST OPTIONS */}
         <div className="row mt-2 p-3 px-5 justify-content-end">
-          <div class="d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <h2>TodoList</h2>
           </div>
           <div className="row">
